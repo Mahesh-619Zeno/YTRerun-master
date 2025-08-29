@@ -1,0 +1,18 @@
+{
+    "name": "YTBeam",
+    "version": "1.0.0",
+    "description": "WebApp that turns any youtube video into a tv-channel like livestream with chat.",
+    "author": "Robin Paret",
+    "license": "GNU-GPL",
+    "homepage": "https://github.com/robinpdev/YTRerun",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/robinpdev/YTRerun.git"
+    },
+    "bugs": {
+      "url": "https://github.com/robinpdev/YTRerun/issues"
+    },
+    "engines": {
+      
+    }
+  }

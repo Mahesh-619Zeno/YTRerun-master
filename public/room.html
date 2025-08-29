@@ -1,0 +1,85 @@
+<!--
+	This page contains the actual player and chatroom of a video
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Welcome to YTRerun</title>
+
+	<script src="js/libs/jquery-3.6.0.min.js"></script>
+	<script src="js/libs/handlebars.js"></script>
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+	<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-database.js"></script>
+	<script src="js/libs/seedrandom.min.js"></script>
+
+	<link rel="shortcut icon" type="image/png" href="graphics/favicon.png">
+	
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/room.css">
+	<link rel="stylesheet" href="css/flexbox.css">
+
+</head>
+
+<body style="overflow: hidden;">
+
+	<div id="stencils" class="stencil">
+
+	</div>
+
+	<boxcol style="align-items: stretch; height: 100vh; flex-grow: 0;" class="minimal" id="maincontent">
+
+		<boxrow class="menubar" style="width: 100%; height: 5.4%;">
+			<img id="logo" onclick="window.location.href='https://ytrerun.webflow.io/'" src="./graphics/new_full_logo_v1_1x.png">
+			<div style="flex: 1;"></div>
+			<boxrow id="linkies" class="vcenter">
+				<!--<a href="./rooms.html"><boxrow>Rooms</boxrow></a>	future feature	!-->
+				
+				<a href="https://www.iubenda.com/privacy-policy/90344828" class="iubenda-black iubenda-embed" title="Privacy Policy ">Privacy Policy</a><script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+				<a href="./joinroom.html"><boxrow>Join other room</boxrow></a>
+				<a href="https://ytrerun.webflow.io/#about"><boxrow>About</boxrow></a>
+				<a style="cursor: pointer;" onclick="logout()">
+					<boxrow>Log out</boxrow>
+				</a>
+				<a href="https://github.io"><boxrow>Github</boxrow></a>
+				<a style="margin-right: 16px;" class="accentlink" onclick="copyLink()"><boxrow id="copytext">Copy room link</boxrow></a>
+			</boxrow>
+		</boxrow>
+
+		<boxrow class="stretch minimal" style="width: 100%; height: 94.6%;">
+			<div style="flex-basis: 70%;">
+				<div id="playercapsule" class="playerc" style="width: 100%; height: 100%;">
+					<div id="player"></div>
+				</div>
+			</div>
+			<boxcol class="chatbox" style="width: 30%; flex-grow: 0;">
+				<boxcol id="messages" style="flex: 1; overflow: auto; padding-bottom: 6px;">
+
+				</boxcol>
+				<boxrow>
+					<input id="messagei" type="text" id="lname" style="flex: 1;">
+					<button onclick="sendmessage(messagei.value); messagei.value = '';" class="smallbutton">send</button>
+				</boxrow>
+			</boxcol>
+		</boxrow>
+
+	</boxcol>
+
+	<script src="./js/startup.js"></script>
+	<script src="./js/room.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": [{
+    "target": "ytbeam",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [{
+        "source": "index.html",
+        "destination": "https://ytrerun.webflow.io"
+      },
+      {
+        "source": "**",
+        "destination": "/redirector.html"
+      }
+    ]
+  }, {
+    "target": "ytrerun",
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [{
+        "source": "index.html",
+        "destination": "https://ytrerun.webflow.io"
+      },
+      {
+        "source": "**",
+        "destination": "/redirector.html"
+      }
+    ]
+  }],
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

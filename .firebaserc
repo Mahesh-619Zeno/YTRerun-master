@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "ytbeam"
+  },
+  "targets": {
+    "ytbeam": {
+      "hosting": {
+        "ytrerun": [
+          "ytrerun"
+        ],
+        "ytbeam": [
+          "ytbeam"
+        ]
+      }
+    }
+  }
+}

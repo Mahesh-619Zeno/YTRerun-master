@@ -1,0 +1,123 @@
+.chatbox{
+    background: rgb(49, 49, 49);
+    border: 2px solid rgb(253, 253, 253);
+}
+
+.message{
+    transition: 0.4s;
+    border-radius: 8px;
+    width: fit-content;
+    padding: 8px;
+    margin-top: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    max-width: 90%;
+    color: white;
+
+    -webkit-animation: fadein 0.4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 0.4s; /* Firefox < 16 */
+        -ms-animation: fadein 0.4s; /* Internet Explorer */
+         -o-animation: fadein 0.4s; /* Opera < 12.1 */
+            animation: fadein 0.4s;
+}
+
+.foreign{
+    background-color: rgb(26, 26, 179);
+}
+
+.domestic{
+    margin-right: 2%;
+    background-color: rgb(9, 9, 105);
+}
+
+.minimal{
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.menubar{
+    background: rgb(49, 49, 49);
+    padding: 4px;
+}
+
+#linkies > a{
+    transition: 0.24s;
+    height: 100%;
+    text-decoration: none;
+    text-align: center;
+    color: rgb(189, 0, 0);
+}
+
+#linkies > a > boxrow{
+    transition: 0.24s;
+    align-items: center;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 4px;
+    margin-right: 6px;
+    height: 100%;
+    font-size: 2.4vh;
+}
+
+#linkies > a > boxrow:hover{
+    color: white;
+    background: rgb(189, 0, 0);
+}
+
+.accentlink{
+    color: white;
+    background: rgb(189, 0, 0);
+    border-radius: 4px;
+}
+
+.accentlink > boxrow{
+    color: white;
+    transition: 0.24s;
+}
+
+.accentlink > boxrow:hover{
+    color: rgb(189, 0, 0);
+}
+
+.accentlink:hover{
+    color: rgb(189, 0, 0);
+    background: none;
+    background-color: none;
+    border-color: rgb(189, 0, 0);
+    cursor: pointer;
+}
+
+#logo:hover{
+    cursor: pointer;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

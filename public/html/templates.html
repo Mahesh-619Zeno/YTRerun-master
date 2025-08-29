@@ -1,0 +1,39 @@
+<boxcol id="soundstencil" onclick="soundcatalogadd({{sid}})" class="sounditem center vcenter"
+    style="text-align: center;">
+    <i id="icon" class="fas {{icon}} fa-2x" style="color: white;"></i>
+</boxcol>
+
+<div id="lestencil" class="partelement">
+    <div id="lename" class="partle partle-info" style="flex: 95%;">{{name}}</div>
+    <div id="lebutton" class="partle partle-click" style="flex: 40px">add</div>
+</div>
+
+<div id="cestencil" class="partelement">
+    <div id="lename" class="partle partle-info" style="flex: 95%;">naamnaam</div>
+    <div id="lebutton" class="partle partle-click" style="flex: 60px">remove</div>
+</div>
+
+<button id="roomstencil" class="roomelement" style="background: #ffa100;" key="{{key}}" onclick="gotoroom('{{name}}')">
+    {{name}}
+</button>
+
+<boxcol id="fmessagestencil" class="message foreign" key="{{key}}">
+    <boxrow>
+        <div style="font-size: 12px; color: hsl({{sendercolor}}, 50%, 70%);">{{sender}}</div>
+        <div style="font-size: 12px;">&nbspat {{time}}</div>
+    </boxrow>
+    <p class="minimal">{{text}}</p>
+</boxcol>
+
+<div style="width: 100%;" id="dmessagestencil" class="messageparent" key="{{key}}">
+    <boxrow>
+        <div style="flex: 1;"></div>
+        <boxcol id="fmessagestencil" class="message domestic">
+            <boxrow>
+                <div style="font-size: 12px; color: hsl({{sendercolor}}, 50%, 70%);">{{sender}}</div>
+                <div style="font-size: 12px;">&nbspat {{time}}</div>
+            </boxrow>
+            <p class="minimal">{{text}}</p>
+        </boxcol>
+    </boxrow>
+</div>

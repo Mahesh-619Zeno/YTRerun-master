@@ -1,0 +1,144 @@
+<!--
+	The user is redirected to this page if not logged in
+-->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>YTRerun login</title>
+
+	<script src="js/libs/jquery-3.6.0.min.js"></script>
+	<script src="js/libs/handlebars.js"></script>
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script defer src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script defer src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+	<link rel="shortcut icon" type="image/png" href="graphics/favicon.png">
+
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/room.css">
+	<link rel="stylesheet" href="css/flexbox.css">
+
+</head>
+
+<body>
+	<div id="stencils" class="stencil">
+
+	</div>
+
+	<boxcol style="align-items: stretch; height: 100vh; flex-grow: 0;" class="minimal" id="maincontent">
+
+		<boxrow class="menubar" style="width: 100%; height: 5.4%;">
+			<img id="logo" onclick="window.location.href='https://ytrerun.webflow.io/'"
+				src="./graphics/new_full_logo_v1_1x.png">
+			<div style="flex: 1;"></div>
+			<boxrow id="linkies" class="vcenter">
+				<!--<a href="./rooms.html"><boxrow>Rooms</boxrow></a>	future feature	!-->
+				<a href="https://www.iubenda.com/privacy-policy/90344828" class="iubenda-black iubenda-embed"
+					title="Privacy Policy ">Privacy Policy</a>
+				<script type="text/javascript">
+					(function (w, d) {
+						var loader = function () {
+							var s = d.createElement("script"),
+								tag = d.getElementsByTagName("script")[0];
+							s.src = "https://cdn.iubenda.com/iubenda.js";
+							tag.parentNode.insertBefore(s, tag);
+						};
+						if (w.addEventListener) {
+							w.addEventListener("load", loader, false);
+						} else if (w.attachEvent) {
+							w.attachEvent("onload", loader);
+						} else {
+							w.onload = loader;
+						}
+					})(window, document);
+				</script>
+				<a href="https://ytrerun.webflow.io/#about">
+					<boxrow>About</boxrow>
+				</a>
+				<a href="https://github.io">
+					<boxrow>Github</boxrow>
+				</a>
+			</boxrow>
+
+
+		</boxrow>
+
+		<boxrow class="stretch minimal" style="width: 100%; height: 94.6%; background-color: black;">
+			<boxcol id="message">
+				<h2>Welcome</h2>
+				<h1>Please login to YTRerun</h1>
+				<p style="color: white;">Your account id is used to verify that you are a real person and to keep out
+					banned users, keeping everything safe!</p>
+
+				<boxcol class="center vcenter" id="rooms">
+					<div class="row" onclick="login()">
+						<div class="col-md-3">
+							<a class="btn btn-outline-dark" style="background: none;" role="button"
+								style="text-transform:none">
+								<img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in"
+									src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+								Log in with Google
+							</a>
+						</div>
+					</div>
+
+					<div class="row" onclick="anonlogin()">
+						<div class="col-md-3">
+							<a class="btn btn-outline-dark" style="background: none;" role="button"
+								style="text-transform:none">
+
+								Log in anonymously
+							</a>
+						</div>
+					</div>
+
+					<div class="row" onclick="logout()">
+						<div class="col-md-3">
+							<a class="btn btn-outline-dark" style="background: none;" role="button"
+								style="text-transform:none">
+
+								Log out
+							</a>
+						</div>
+					</div>
+
+					<p style="color: white;">
+						By clicking these login buttons, you agree to this website's Privacy policy, which you can see by clicking the button in the menu bar. Thank you!
+					</p>
+
+					<!-- Minified CSS and JS -->
+					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+						integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+						crossorigin="anonymous">
+					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+						integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+						crossorigin="anonymous">
+					</script>
+
+				</boxcol>
+
+
+
+
+
+			</boxcol>
+		</boxrow>
+
+	</boxcol>
+
+
+
+	<script src="./js/login.js"></script>
+	<script defer src="./js/startup.js"></script>
+
+</body>
+
+</html>

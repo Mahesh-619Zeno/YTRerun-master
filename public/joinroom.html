@@ -1,0 +1,104 @@
+<!--
+	The user can use this page to enter a youtube link and join its room.
+-->
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>join YTRerun room</title>
+
+	<script src="js/libs/jquery-3.6.0.min.js"></script>
+	<script src="js/libs/handlebars.js"></script>
+
+	<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+	<script defer src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+	<!-- Add Firebase products that you want to use -->
+	<script defer src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+
+	<link rel="shortcut icon" type="image/png" href="graphics/favicon.png">
+
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="css/room.css">
+	<link rel="stylesheet" href="css/flexbox.css">
+
+</head>
+
+<body>
+    <script src="js/joinroom.js"></script>
+
+	<div id="stencils" class="stencil">
+
+	</div>
+
+	<boxcol style="align-items: stretch; height: 100vh; flex-grow: 0;" class="minimal" id="maincontent">
+
+		<boxrow class="menubar" style="width: 100%; height: 5.4%;">
+			<img id="logo" onclick="window.location.href='https://ytrerun.webflow.io/'"
+				src="./graphics/new_full_logo_v1_1x.png">
+			<div style="flex: 1;"></div>
+			<boxrow id="linkies" class="vcenter">
+				<!--<a href="./rooms.html"><boxrow>Rooms</boxrow></a>	future feature	!-->
+				<a href="https://www.iubenda.com/privacy-policy/90344828" class="iubenda-black iubenda-embed"
+					title="Privacy Policy ">Privacy Policy</a>
+				<script type="text/javascript">
+					(function (w, d) {
+						var loader = function () {
+							var s = d.createElement("script"),
+								tag = d.getElementsByTagName("script")[0];
+							s.src = "https://cdn.iubenda.com/iubenda.js";
+							tag.parentNode.insertBefore(s, tag);
+						};
+						if (w.addEventListener) {
+							w.addEventListener("load", loader, false);
+						} else if (w.attachEvent) {
+							w.attachEvent("onload", loader);
+						} else {
+							w.onload = loader;
+						}
+					})(window, document);
+				</script>
+				<a href="https://ytrerun-landing.webflow.io/#about">
+					<boxrow>About</boxrow>
+				</a>
+				<a style="cursor: pointer;" onclick="logout()">
+					<boxrow>Log out</boxrow>
+				</a>
+				<a href="https://github.io">
+					<boxrow>Github</boxrow>
+				</a>
+			</boxrow>
+
+
+		</boxrow>
+
+		<boxrow class="stretch minimal" style="width: 100%; background-color: black;">
+			<boxcol id="message">
+				<h2>Welcome</h2>
+				<h1>Enter a youtube video link to join its room.</h1>
+				<p style="color: white;">You can copy it from the address bar on youtube.com and paste it in the textbox, then press join!<br/>
+                Alternatively, you can change www.youtube.com to ytrerun.web.app in your address bar and press enter.</p>
+
+                <p id="wronglink" style="color: red; display: none;">That was an invalid link, it needs to contain ?v=YOURIDHERE</p>
+
+				<boxrow style="width: 100%;">
+					<input id="linkinput" type="text" style="flex: 1;">
+					<button onclick="joinroom()" class="smallbutton">join</button>
+				</boxrow>
+			</boxcol>
+		</boxrow>
+
+	</boxcol>
+
+
+
+	<script src="./js/login.js"></script>
+	<script defer src="./js/startup.js"></script>
+
+</body>
+
+</html>

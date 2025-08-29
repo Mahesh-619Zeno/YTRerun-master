@@ -1,0 +1,21 @@
+{
+  "rules": {
+		"rooms":{
+      ".read": "auth != null",
+      "$room":{
+      	".read": "auth != null",
+      	".write": "newData.exists() && !data.exists() && newData.child('uid').val() == auth.uid && newData.child('createdAt').val() === now && auth != null"
+    
+      }
+      },
+    "messages":{
+      "$messageroom":{
+        ".read": "auth != null",
+        "$message":{
+          ".read": "auth != null",
+        	".write": "newData.exists() && !data.exists() && newData.child('uid').val() == auth.uid && (newData.child('sender').val() == auth.token.name || (newData.child('sender').val() == 'anonymous' && auth.provider == 'anonymous')) && newData.child('createdAt').val() === now && auth != null"
+        }
+      }
+    }
+  }
+}
