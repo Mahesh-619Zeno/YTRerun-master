@@ -242,9 +242,8 @@ function onPlayerStateChange(event) {
     } else if (event.data == YT.PlayerState.PAUSED) {
         playing = false;
     } else if (event.data == YT.PlayerState.ENDED) {
-        console.log("restarting...");
-        player.playVideo();
-        synchronise();
+        console.log("vid ended");
+        playNextVideo();
     }
 
     if (playing == true && prevplaystate == false) {
@@ -252,6 +251,25 @@ function onPlayerStateChange(event) {
     }
 
     prevplaystate = playing;
+
+    function playNextVideo() {
+    roomref.once('value', (result) => {
+        let room = result.val();
+        if (room && room.playlist && room.playlist.length > 0) {
+            let playlist = room.playlist;
+            let currentVideoId = player.getVideoData().video_id;
+            let currentVideoIndex = playlist.indexOf(currentVideoId);
+            let nextVideoIndex = currentVideoIndex + 1;
+            if (nextVideoIndex < playlist.length) {
+                let nextVideoId = playlist[nextVideoIndex];
+                player.loadVideoById(nextVideoId);
+            } else {
+                // Optionally loop back to the beginning
+                player.loadVideoById(playlist[0]);
+            }
+        }
+    });
+}
 }
 
 //synchronisation logic
