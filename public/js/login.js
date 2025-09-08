@@ -6,36 +6,33 @@ document.addEventListener('DOMContentLoaded', function () {
 function startfirebase() {
     console.log("startup...");
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyC6Cq8c5jprpZYin5iB_KSAdatFbRPicfk",
-        authDomain: "ytbeam.firebaseapp.com",
-        databaseURL: "https://ytbeam-default-rtdb.firebaseio.com",
-        projectId: "ytbeam",
-        storageBucket: "ytbeam.appspot.com",
-        messagingSenderId: "161790539788",
-        appId: "1:161790539788:web:08effd61c5fb7f58a39629"
-      };
-
     if (!firebase.apps.length) {
+        const firebaseConfig = {
+            apiKey: "AIzaSyC6Cq8c5jprpZYin5iB_KSAdatFbRPicfk",
+            authDomain: "ytbeam.firebaseapp.com",
+            databaseURL: "https://ytbeam-default-rtdb.firebaseio.com",
+            projectId: "ytbeam",
+            storageBucket: "ytbeam.appspot.com",
+            messagingSenderId: "161790539788",
+            appId: "1:161790539788:web:08effd61c5fb7f58a39629"
+        };
         var app = firebase.initializeApp(firebaseConfig);
+        firebase.initializeApp(firebaseConfig);
         console.log("startup");
+        console.log("Firebase initialized");
     }
 }
 
 function redirect() {
-    console.log("redirecting...");
-    let tags = getParams(window.location.href);
-    console.log(tags)
-    if (tags.v != undefined) {
+    console.log("Redirecting...");
+    const { v, page } = getParams(window.location.href);
+    if (v) {
         newurl = "/room.html" + '?v=' + tags.v;
-        window.location.href = newurl;
-    }
-    else if(tags.page != undefined){
+    }else if (page) {
         window.location.href = tags.page;
-    }
-    else {
-        newurl = "";
-        window.location.replace(window.location.protocol + '//' + window.location.hostname + ':' + location.port + '/joinroom.html');
+        window.location.href = page;
+    }else {
+        window.location.replace(`${location.protocol}//${location.hostname}:${location.port}/joinroom.html`);
     }
 }
 
@@ -48,13 +45,15 @@ function login() {
         if (user) {
             redirect();
         } else {
-            console.log("no user, this is expected");
+            console.log("No user signed in (expected on first login)");
         }
     });
 
     gauth = new firebase.auth.GoogleAuthProvider();
     // using the object we will authenticate the user.
-    firebase.auth().signInWithPopup(gauth);
+    firebase.auth().signInWithPopup(gauth).catch((error) => {
+        console.error("Google sign-in error:", error);
+    });
 }
 
 function anonlogin() {
