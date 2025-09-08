@@ -4,8 +4,11 @@
       ".read": "auth != null",
       "$room":{
       	".read": "auth != null",
-      	".write": "newData.exists() && !data.exists() && newData.child('uid').val() == auth.uid && newData.child('createdAt').val() === now && auth != null"
-    
+      	".write": "newData.exists() && !data.exists() && newData.child('uid').val() == auth.uid && newData.child('createdAt').val() === now && auth != null",
+        "playlists": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
       }
       },
     "messages":{

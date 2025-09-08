@@ -242,8 +242,9 @@ function onPlayerStateChange(event) {
     } else if (event.data == YT.PlayerState.PAUSED) {
         playing = false;
     } else if (event.data == YT.PlayerState.ENDED) {
-        console.log("vid ended");
-        playNextVideo();
+        console.log("restarting...");
+        player.playVideo();
+        synchronise();
     }
 
     if (playing == true && prevplaystate == false) {
@@ -251,25 +252,6 @@ function onPlayerStateChange(event) {
     }
 
     prevplaystate = playing;
-
-    function playNextVideo() {
-    roomref.once('value', (result) => {
-        let room = result.val();
-        if (room && room.playlist && room.playlist.length > 0) {
-            let playlist = room.playlist;
-            let currentVideoId = player.getVideoData().video_id;
-            let currentVideoIndex = playlist.indexOf(currentVideoId);
-            let nextVideoIndex = currentVideoIndex + 1;
-            if (nextVideoIndex < playlist.length) {
-                let nextVideoId = playlist[nextVideoIndex];
-                player.loadVideoById(nextVideoId);
-            } else {
-                // Optionally loop back to the beginning
-                player.loadVideoById(playlist[0]);
-            }
-        }
-    });
-}
 }
 
 //synchronisation logic
@@ -365,6 +347,35 @@ function copyTextToClipboard(text, callback) {
     }
 
     document.body.removeChild(textArea);
+}    document.body.removeChild(textArea);
+}
+
+// Function to add a video to the playlist
+function addVideoToPlaylist(playlistId, videoId) {
+  const playlistRef = db.ref('rooms/' + roomid + '/playlists/' + playlistId + '/videos');
+  playlistRef.push().set({
+    videoId: videoId,
+    addedAt: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+// Function to create a new playlist
+function createPlaylist(playlistName) {
+  const playlistRef = db.ref('rooms/' + roomid + '/playlists');
+  playlistRef.push().set({
+    name: playlistName,
+    createdAt: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+// Function to retrieve playlists
+function getPlaylists() {
+  const playlistsRef = db.ref('rooms/' + roomid + '/playlists');
+  playlistsRef.on('value', (snapshot) => {
+    const playlists = snapshot.val();
+    // Process the playlists data
+    console.log(playlists);
+  });
 }
 /*
 {
