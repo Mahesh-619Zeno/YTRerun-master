@@ -227,23 +227,34 @@ function onPlayerReady(event) {
     }
 }
 
+function loadNextVideo() {
+    if (currentVideoIndex < playlist.length - 1) {
+        currentVideoIndex++;
+        player.loadVideoById(playlist[currentVideoIndex]);
+    } else {
+        console.log("End of playlist reached.");
+        // Optionally, loop back to the start of the playlist
+        // currentVideoIndex = 0;
+        // player.loadVideoById(playlist[currentVideoIndex]);
+    }
+}
 
 //synchronise and restart when needed (video ending, afer pause by client)
 let playing = false;
 let prevplaystate = false;
 //TODO: better syncing by correcting every 60 seconds or so, requires testing
 function onPlayerStateChange(event) {
-    if (event === 0) {
-        console.log("vid ended");
+    
+
+    if (event.data == YT.PlayerState.ENDED) {
+        console.log("Video ended, loading next video...");
+        loadNextVideo();
     }
 
     if (event.data == YT.PlayerState.PLAYING) {
         playing = true;
     } else if (event.data == YT.PlayerState.PAUSED) {
         playing = false;
-    } else if (event.data == YT.PlayerState.ENDED) {
-        console.log("vid ended");
-        playNextVideo();
     }
 
     if (playing == true && prevplaystate == false) {
@@ -251,25 +262,6 @@ function onPlayerStateChange(event) {
     }
 
     prevplaystate = playing;
-
-    function playNextVideo() {
-    roomref.once('value', (result) => {
-        let room = result.val();
-        if (room && room.playlist && room.playlist.length > 0) {
-            let playlist = room.playlist;
-            let currentVideoId = player.getVideoData().video_id;
-            let currentVideoIndex = playlist.indexOf(currentVideoId);
-            let nextVideoIndex = currentVideoIndex + 1;
-            if (nextVideoIndex < playlist.length) {
-                let nextVideoId = playlist[nextVideoIndex];
-                player.loadVideoById(nextVideoId);
-            } else {
-                // Optionally loop back to the beginning
-                player.loadVideoById(playlist[0]);
-            }
-        }
-    });
-}
 }
 
 //synchronisation logic
@@ -365,6 +357,34 @@ function copyTextToClipboard(text, callback) {
     }
 
     document.body.removeChild(textArea);
+}
+
+// Function to add a video to the playlist
+function addVideoToPlaylist(playlistId, videoId) {
+  const playlistRef = db.ref('rooms/' + roomId + '/playlists/' + playlistId + '/videos');
+  playlistRef.push().set({
+    videoId: videoId,
+    addedAt: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+// Function to create a new playlist
+function createPlaylist(playlistName) {
+  const playlistRef = db.ref('rooms/' + roomId + '/playlists');
+  playlistRef.push().set({
+    name: playlistName,
+    createdAt: firebase.database.ServerValue.TIMESTAMP
+  });
+}
+
+// Function to retrieve playlists
+function getPlaylists() {
+  const playlistsRef = db.ref('rooms/' + roomId + '/playlists');
+  playlistsRef.once('value', (snapshot) => {
+    const playlists = snapshot.val();
+    // Process the playlists data
+    console.log(playlists);
+  });
 }
 /*
 {
