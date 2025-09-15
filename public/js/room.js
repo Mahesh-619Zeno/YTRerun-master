@@ -227,24 +227,34 @@ function onPlayerReady(event) {
     }
 }
 
+function loadNextVideo() {
+    if (currentVideoIndex < playlist.length - 1) {
+        currentVideoIndex++;
+        player.loadVideoById(playlist[currentVideoIndex]);
+    } else {
+        console.log("End of playlist reached.");
+        // Optionally, loop back to the start of the playlist
+        // currentVideoIndex = 0;
+        // player.loadVideoById(playlist[currentVideoIndex]);
+    }
+}
 
 //synchronise and restart when needed (video ending, afer pause by client)
 let playing = false;
 let prevplaystate = false;
 //TODO: better syncing by correcting every 60 seconds or so, requires testing
 function onPlayerStateChange(event) {
-    if (event === 0) {
-        console.log("vid ended");
+    
+
+    if (event.data == YT.PlayerState.ENDED) {
+        console.log("Video ended, loading next video...");
+        loadNextVideo();
     }
 
     if (event.data == YT.PlayerState.PLAYING) {
         playing = true;
     } else if (event.data == YT.PlayerState.PAUSED) {
         playing = false;
-    } else if (event.data == YT.PlayerState.ENDED) {
-        console.log("restarting...");
-        player.playVideo();
-        synchronise();
     }
 
     if (playing == true && prevplaystate == false) {
