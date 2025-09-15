@@ -7,7 +7,7 @@
       	".write": "newData.exists() && !data.exists() && newData.child('uid').val() == auth.uid && newData.child('createdAt').val() === now && auth != null",
         "playlists": {
           ".read": "auth != null",
-          ".write": "auth != null"
+          ".write": "root.child('rooms').child($room).child('uid').val() == auth.uid"
         }
       }
       },
