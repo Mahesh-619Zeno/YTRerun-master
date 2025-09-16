@@ -21,7 +21,8 @@ else{
 }
 
 function gotoroom(name){
-    let newurl = 'https://ytrerun.web.app/room.html?v=' + name;
+    //let newurl = 'https://ytrerun.web.app/room.html?v=' + name;
+	const newurl = `https://ytrerun.web.app/room.html?v=${encodeURIComponent(name)}`;
     window.location.href = newurl;
 }
 
