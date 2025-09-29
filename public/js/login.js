@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', function () {
-
-
+document.addeventlistener('DOMContentLoaded', function () {
+    console.log("DOM loaded");
 });
 
-function startfirebase() {
-    console.log("startup...");
 
-    const firebaseConfig = {
+function StartFirebase() {
+    console.log("Startup...");
+
+    const FirebaseConfig = {
         apiKey: "AIzaSyC6Cq8c5jprpZYin5iB_KSAdatFbRPicfk",
         authDomain: "ytbeam.firebaseapp.com",
         databaseURL: "https://ytbeam-default-rtdb.firebaseio.com",
@@ -17,21 +17,21 @@ function startfirebase() {
       };
 
     if (!firebase.apps.length) {
-        var app = firebase.initializeApp(firebaseConfig);
-        console.log("startup");
+        app = firebase.initializeApp(FirebaseConfig);
+        console.log("startup initialized");
     }
 }
 
-function redirect() {
-    console.log("redirecting...");
-    let tags = getParams(window.location.href);
-    console.log(tags)
-    if (tags.v != undefined) {
-        newurl = "/room.html" + '?v=' + tags.v;
+function RedirectUser() {
+    console.log("Redirecting...");
+    let Tags = GetParams(window.location.href);
+    console.log(Tags)
+    if (Tags.v != undefined) {
+        newurl = "/room.html" + '?v=' + Tags.v;
         window.location.href = newurl;
     }
-    else if(tags.page != undefined){
-        window.location.href = tags.page;
+    else if(Tags.page !== undefined){
+        window.location.href = Tags.page;
     }
     else {
         newurl = "";
@@ -39,58 +39,55 @@ function redirect() {
     }
 }
 
-function login() {
+function loginUser() {
+    StartFirebase();
 
-    startfirebase();
-
-    firebase.auth().onAuthStateChanged((user) => {
-        console.log("auth changed");
-        if (user) {
-            redirect();
+    firebase.auth().onAuthStateChanged((User) => {
+        console.log("Auth changed");
+        if (User) {
+            RedirectUser();
         } else {
-            console.log("no user, this is expected");
+            console.log("No user. Expected on first load.");
         }
     });
 
     gauth = new firebase.auth.GoogleAuthProvider();
-    // using the object we will authenticate the user.
     firebase.auth().signInWithPopup(gauth);
 }
 
-function anonlogin() {
-    startfirebase();
+function anonymousLogin() {
+    StartFirebase();
 
     firebase.auth().signInAnonymously()
         .then(() => {
-            redirect();
+            RedirectUser();
         })
-        .catch((error) => {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log("anon login error");
+        .catch((e) => {
+            var errorcode = e.code;
+            var errormessage = e.message;
+            console.log("Anon login error");
         });
 }
 
-function logout() {
-    startfirebase();
+function logoutNow() {
+    StartFirebase();
 
     firebase.auth().signOut();
-    console.log("logged out");
+    console.log("Logged out");
     setTimeout(function(){
         window.location.href = "https://ytbeam-landing.webflow.io";
     }, 1000);
-    
 }
 
-var getParams = function (url) {
-	var params = {};
+var GetParams = function (URL) {
+	var Params = {};
 	var parser = document.createElement('a');
-	parser.href = url;
+	parser.href = URL;
 	var query = parser.search.substring(1);
-	var vars = query.split('?').join(', ').split('&');
-	for (var i = 0; i < vars.length; i++) {
-		var pair = vars[i].split('=');
-		params[pair[0]] = decodeURIComponent(pair[1]);
+	var Vars = query.split('?').join(', ').split('&');
+	for (var i = 0; i < Vars.length; i++) {
+		var Pair = Vars[i].split('=');
+		Params[Pair[0]] = decodeURIComponent(Pair[1]);
 	}
-	return params;
+	return Params;
 };
