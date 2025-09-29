@@ -1,4 +1,4 @@
-document.addeventlistener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM loaded");
 });
 
@@ -7,7 +7,7 @@ function StartFirebase() {
     console.log("Startup...");
 
     const FirebaseConfig = {
-        apiKey: "AIzaSyC6Cq8c5jprpZYin5iB_KSAdatFbRPicfk",
+        apiKey: process.env.FIREBASE_API_KEY,
         authDomain: "ytbeam.firebaseapp.com",
         databaseURL: "https://ytbeam-default-rtdb.firebaseio.com",
         projectId: "ytbeam",
