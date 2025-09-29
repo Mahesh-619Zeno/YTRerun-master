@@ -17,8 +17,8 @@ function startfirebase() {
       };
 
     if (!firebase.apps.length) {
-        var app = firebase.initializeApp(firebaseConfig);
-        console.log("startup");
+      firebase.initializeApp(firebaseConfig);
+      console.log("Firebase initialized");
     }
 }
 
